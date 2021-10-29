@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <title>HTML dynamic table using JavaScript</title>
+    <body>
+            <div id="myform">
+            <b>Update name and age </b>
+
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="name"></td>
+                </tr>
+
+                <tr>
+                    <td>Age:</td>
+                    <td><input type="text" id="age">
+                        <br>
+                    <input type="button" id="add" value="Add" onclick="addRow()">
+                    <br>
+                    <input type="button" id="add" value="Update" onclick="editRow()">
+                    
+                </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="myDynamicTable">
+            <h2>updated data</h2>
+            <table id="myTableData"  border="2" cellpadding="5">
+                <tr>
+                    
+                    <td><b>Name</b></td>
+                    <td><b>Age</b></td>
+                    <td>Delete</td>
+                     <td>Edit</td> 
+                </tr>
+                
+            </table>
+
+        </div>
+
+        <script>
+            
+            function addRow()
+            {
+                var myName = document.getElementById("name");
+                var age = document.getElementById("age");
+
+
+                var table = document.getElementById("myTableData");
+
+                var rowCount = table.rows.length;
+                var row = table.insertRow(rowCount);
+
+                
+                
+                row.insertCell(0).innerHTML= myName.value;
+                row.insertCell(1).innerHTML= age.value;
+                row.insertCell(2).innerHTML= '<input type="button" value = "Delete" onClick="deleteRow(this)">';
+                row.insertCell(3).innerHTML= '<input type="button" id="edit" value = "Edit" onClick="Editrow(this)">';
+
+
+            }
+
+            function deleteRow(obj)
+            {
+                var index = obj.parentNode.parentNode.rowIndex;
+                var table = document.getElementById("myTableData");
+
+                table.deleteRow(index);
+            }
+            var table = document.getElementById("myTableData"),rIndex;
+             function Editrow()
+            {
+            
+            
+            for(var i = 1; i < table.rows.length; i++)
+            {
+                table.rows[i].onclick = function()
+                {
+                    rIndex = this.rowIndex;
+                    console.log(rIndex);
+                    
+                    document.getElementById("name").value = this.cells[0].innerHTML;
+                    document.getElementById("age").value = this.cells[1].innerHTML;
+
+                
+                }
+            }
+        }
+        
+            function editRow()
+            {
+                // var table = document.getElementById("myTableData"),rIndex;
+                  table.rows[rIndex].cells[0].innerHTML = document.getElementById("name").value;
+                    table.rows[rIndex].cells[1].innerHTML = document.getElementById("age").value;
+
+            }
+                
+
+            
+
+
+        </script>
+
+
+    </body>
+</html>
